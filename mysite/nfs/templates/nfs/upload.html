@@ -1,0 +1,15 @@
+{% extends 'nfs/base.html' %}
+{% block title %}Upload File{% endblock %}
+
+{% block content %}
+
+<p>You're at the UPLOAD view!</p>
+
+<form method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button type="submit">Upload</button>
+</form>
+
+<p><a href="{% url 'nfs:index' %}">Return to Index</a></p>
+{% endblock %}

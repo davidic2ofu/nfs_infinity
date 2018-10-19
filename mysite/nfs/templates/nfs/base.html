@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<h1 style="background-color: #C2DFFF; padding: 8px; box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);">NFS Infinity &#8734x</h1>
+		{% if user.is_authenticated %} Welcome, {{ user.first_name }} ({{ user.username }}) <a href="{% url 'nfs:logout' %}">logout</a> 
+		{% else %} <a href="{% url 'nfs:login' %}">login</a> / <a href="/admin">admin</a> {% endif %}
+		
+		<br><hr>
+		<title>
+			{% block title %}Page Title{% endblock %}
+		</title>
+	
+	</head>
+	
+	<body>
+		
+		{% block content %}
+			Body content
+		{% endblock %}
+		
+	</body>
+	<br><hr>
+</html>

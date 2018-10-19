@@ -1,0 +1,56 @@
+{% extends 'nfs/base.html' %}
+{% block title %}Index{% endblock %}
+
+{% block content %}
+
+<style>
+table {
+    font-family: arial, sans-serif;
+	font-size: 15px;
+    border-collapse: collapse;
+	width: 100%;
+}
+td, th {
+    border: 1px solid #cccccc;
+    text-align: left;
+    padding: 4px;
+}
+th { text-align: center }
+tr:nth-child(even) { background-color: #C2DFFF; }
+p { font-family: arial, sans-serif; }
+input { box-shadow: 0.5px 1px 4px rgba(0, 0, 0, .5); }
+</style>
+
+<p>You're at the INDEX view!</p>
+<p>remote path: _____________</p>
+<p>filters: ________________ </p>
+<fieldset style="border: 0px;">
+<form method="post">
+{% csrf_token %}
+<table style="box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);">
+	<tr>
+		<th>filename</th><th>date</th><th>description</th>
+	</tr>
+	{% for doc in document_list %}
+	<tr>
+		<td><input type="checkbox" id="checkfile{{doc.id}}" name="document" value="{{ doc.id }}"><label for="checkfile{{doc.id}}">{{ doc.document }}</label></td>
+		<td>{{ doc.uploaded_at }}</td>
+		<td style="width: 50%">{{ doc.description }}</td>
+	</tr>
+	{% endfor %}
+</table>
+<br>
+<div style="text-align: center">
+<input type="submit" value="change directory" name="chdir" style="margin: 10px" />
+<input type="submit" value="get one document" name="getone" style="margin: 10px" />
+<input type="submit" value="get selected documents" name="getall" style="margin: 10px" />
+<br><input type="submit" value="delete document" name="delete" style="margin: 10px" />
+</form>
+<form action="{% url 'nfs:upload' %}" style="display: inline">
+	<input type="submit" value="put document" style="margin: 10px" />
+</form>
+</div>
+</fieldset>
+
+
+{% endblock %}
